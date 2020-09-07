@@ -3,7 +3,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-req = []
+req = [
+    'pypdf2'
+]
 
 dev_req = [
     'pytest',

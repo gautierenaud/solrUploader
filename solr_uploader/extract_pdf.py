@@ -3,17 +3,20 @@
 import sys
 import os
 import PyPDF2
-import magic
+import mimetypes
 import toml
 import fnmatch
 
 config = None
+
+
 def parse_configuration(config_path='extraction_config.toml'):
     with open(config_path, 'r') as toml_config:
         global config
         config = toml.loads(toml_config.read())
 
         # TODO: check the config contains everything necessary/default values (initialize class from dict ?)
+
 
 def is_ignored(file_path):
     file_name = os.path.basename(file_path)
@@ -22,9 +25,10 @@ def is_ignored(file_path):
             return True
     return False
 
-mime = magic.Magic(mime=True)
+
 def get_mime(file_path):
-    return mime.from_file(file_path)
+    return mimetypes.MimeTypes().guess_type(file_path)[0]
+
 
 def get_pdf_content(file_path):
     content = ""
@@ -34,6 +38,7 @@ def get_pdf_content(file_path):
             current_page = reader.getPage(page)
             content += current_page.extractText()
     return content
+
 
 def get_text_content(file_path):
     content = ""
@@ -50,7 +55,6 @@ file_path = sys.argv[1]
 if is_ignored(file_path):
     print(f'{file_path} is ignored')
     sys.exit(0)
-
 
 file_mime = get_mime(file_path)
 print(file_mime)
