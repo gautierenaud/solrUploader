@@ -19,5 +19,8 @@ setuptools.setup(
     install_requires=req,
     extras_require={
         'dev': dev_req
+    },
+    entry_points={
+        'console_scripts': ['solr-upload=solr_uploader.uploader:main'],
     }
 )
