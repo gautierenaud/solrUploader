@@ -4,7 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 req = [
-    'pypdf2'
+    'pypdf2',
+    'requests'
 ]
 
 dev_req = [

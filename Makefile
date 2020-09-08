@@ -7,3 +7,6 @@ lint: ## check the linting of the project
 
 init: ## install all dependencies for development
 	pip install -e .[dev]
+
+serve: ## start local solr instance
+	@docker-compose up
