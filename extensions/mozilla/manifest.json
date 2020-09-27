@@ -7,16 +7,11 @@
         "48": "icons/search-48.png"
     },
     "permissions": [
-        "activeTab"
+        "*://*"
     ],
     "browser_action": {
         "default_icon": "icons/search-32.png",
         "default_title": "SolrSearch",
-        "default_popup": "popup/choose_beast.html"
-    },
-    "web_accessible_resources": [
-        "beasts/frog.jpg",
-        "beasts/turtle.jpg",
-        "beasts/snake.jpg"
-    ]
+        "default_popup": "popup/choose_page.html"
+    }
 }

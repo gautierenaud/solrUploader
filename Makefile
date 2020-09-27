@@ -9,4 +9,4 @@ init: ## install all dependencies for development
 	pip install -e .[dev]
 
 serve: ## start local solr instance
-	@docker-compose up
+	@cd serve_env; docker-compose up

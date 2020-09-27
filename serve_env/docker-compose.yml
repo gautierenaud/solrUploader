@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mysolr:
+    image: solr:8
+    ports:
+     - "8983:8983"
+    volumes:
+      - data:/var/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr
+      - start
+      - -c
+      - -f
+  ui:
+    image: nginx
+    ports:
+    - "80:80"
+    volumes:
+      - ./nginx-content:/usr/share/nginx/html:ro
+  proxy:
+    image: nginx
+    ports:
+    - 8899:80
+    volumes:
+    - ./nginx-proxy/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+
+volumes:
+  data:

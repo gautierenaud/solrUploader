@@ -1,0 +1,10 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$.get({
+ url:'http://localhost:8983/solr/demo/query?debug=query&q=name:spinpoint',
+ data:{},
+ success:function(evt){console.log(evt);}
+});
+</script>
+</head>
