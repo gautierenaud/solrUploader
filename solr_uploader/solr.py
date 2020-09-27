@@ -1,27 +1,39 @@
+import json
+
 import requests
 
-
-def create_collection():
-    requests.get("http://localhost:8983/solr/admin/collections?&action=CREATE&name=documents&numShards=1&wt=json")
+from solr_uploader.logger import log
 
 
-def upload_file(id, title):
-    url = 'http://localhost:8983/solr/documents/update/json/docs'
+def collection_exists(collection: str):
+    res = requests.get(f'http://localhost:8983/solr/admin/collections?action=COLSTATUS&collection={collection}&wt=json')
+    json_res = json.loads(res.text)
+    if collection in json_res:
+        return True
+    return False
+
+def create_collection(collection: str):
+    requests.get(f'http://localhost:8983/solr/admin/collections?&action=CREATE&name={collection}&numShards=1&wt=json')
+    commit(collection)
+
+
+def upload_file(collection, filename, fullpath, content):
+    url = f'http://localhost:8983/solr/{collection}/update/json/docs'
     headers = {'Content-Type': 'application/json'}
     data = {
-        "id": id,
-        "title": title,
-        "text": "This is also a text"
+        "id": fullpath,
+        "filename": filename,
+        "fullpath": fullpath,
+        "text": content
     }
-    r = requests.post(url, headers=headers, json=data)
-    print(r.text)
+    requests.post(url, headers=headers, json=data)
 
 
-def commit():
-    r = requests.get("http://localhost:8983/solr/documents/update?commit=true&wt=json")
-    print(r.text)
+def commit(collection):
+    log.info(f'Commit to collection "{collection}"')
+    requests.get(f'http://localhost:8983/solr/{collection}/update?commit=true&wt=json')
 
 
-def get_collection_info():
-    r = requests.get("http://localhost:8983/solr/documents/query?debug=query&q=*:*&wt=json")
-    print(r.text)
+def get_collection_info(collection):
+    r = requests.get(f'http://localhost:8983/solr/{collection}/query?debug=query&q=*:*&wt=json')
+    return r.text

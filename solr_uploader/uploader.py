@@ -1,6 +1,7 @@
 import argparse
 from solr_uploader.logger import log
 from solr_uploader.solr import *
+from solr_uploader.scan import *
 
 
 def parse_args():
@@ -21,8 +22,9 @@ def main():
         log.setLevel(verbose)
         log.info(f'Log level set to {verbose}')
 
-    for i in range(10):
-        upload_file(str(i), f'title is {i}')
-    commit()
+    collection = 'documents'
+    if not collection_exists(collection):
+        create_collection(collection)
 
-    get_collection_info()
+    scan_path(collection, folder)
+    commit(collection)
