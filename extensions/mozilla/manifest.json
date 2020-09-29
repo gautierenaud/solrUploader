@@ -6,9 +6,6 @@
     "icons": {
         "48": "icons/search-48.png"
     },
-    "permissions": [
-        "*://*"
-    ],
     "browser_action": {
         "default_icon": "icons/search-32.png",
         "default_title": "SolrSearch",

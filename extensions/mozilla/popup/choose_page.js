@@ -3,6 +3,9 @@ document.addEventListener("click", function(e) {
         return;
     }
 
+    let searchText = document.getElementById("searchbox").value;
+    console.log(searchText);
+
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -16,12 +19,18 @@ document.addEventListener("click", function(e) {
         console.log(xhr.getAllResponseHeaders())
     }
 
-    xhr.open('GET', 'http://localhost:8899/solr/documents/query?debug=query&q=*:*&wt=json', true);
+    xhr.open('GET', `http://localhost:8899/solr/documents/query?debug=query&q=text:*${searchText}*&wt=json`, true);
     xhr.send();
 });
 
 function displayResults(results) {
     let resultDiv = document.getElementById("result");
+
+    // remove previous results
+    while (resultDiv.firstChild) {
+        resultDiv.removeChild(resultDiv.lastChild);
+    }
+
     for (const doc of results["response"]["docs"]) {
         var newDiv = document.createElement("div");
         var newContent = document.createTextNode(doc["filename"]);
