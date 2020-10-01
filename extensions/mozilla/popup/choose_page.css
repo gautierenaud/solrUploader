@@ -1,18 +1,6 @@
 html,
 body {
-    width: 300px;
-}
-
-.page-choice {
-    width: 100%;
-    padding: 4px;
-    font-size: 1.5em;
-    text-align: center;
-    cursor: pointer;
-}
-
-.page-choice:hover {
-    background-color: #CFF2F2;
+    width: 400px;
 }
 
 .button {
@@ -26,4 +14,33 @@ body {
     max-width: 100px;
     padding: 5px;
     text-align: center;
+}
+
+#searchbox {
+    width: 100%;
+    flex-grow: 1;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#searchzone {
+    width: 100%;
+    display: flex;
+}
+
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
 }
