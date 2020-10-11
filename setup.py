@@ -4,6 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 req = [
+    'flask',
     'pypdf2',
     'requests'
 ]
@@ -22,6 +23,7 @@ setuptools.setup(
         'dev': dev_req
     },
     entry_points={
-        'console_scripts': ['solr-upload=solr_uploader.uploader:main'],
+        'console_scripts': ['solr-upload=solr_uploader.uploader:main',
+                            'run-endpoint=solr_uploader.service.endpoint:start_endpoint'],
     }
 )

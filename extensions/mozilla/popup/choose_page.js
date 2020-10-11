@@ -1,8 +1,10 @@
-document.addEventListener("click", function(e) {
-    if (!e.target.classList.contains("page-choice")) {
-        return;
-    }
+// add onclick event listeners
+var searchButton = document.getElementById("searchbutton");
+searchButton.addEventListener("click", function(e) {
+    sendSearchRequest();
+});
 
+function sendSearchRequest() {
     let searchText = document.getElementById("searchbox").value;
     console.log(searchText);
 
@@ -14,14 +16,12 @@ document.addEventListener("click", function(e) {
     };
 
     xhr.onerror = function() {
-        document.getElementById("result").innerHTML = "error " + this;
         console.log(this)
-        console.log(xhr.getAllResponseHeaders())
     }
 
-    xhr.open('GET', `http://localhost:8899/solr/documents/query?debug=query&q=text:${searchText}~2&hl.fl=text&hl=on&usePhraseHighLighter=true&wt=json`, true);
+    xhr.open('GET', `http://localhost:8899/solr/documents/query?debug=query&q=text:"${searchText}"~2&hl.fl=text&hl=on&usePhraseHighLighter=true&wt=json`, true);
     xhr.send();
-});
+}
 
 // Get the input field
 var input = document.getElementById("searchbox");
@@ -32,11 +32,13 @@ input.addEventListener("keyup", function(event) {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        document.getElementById("nana").click();
+        document.getElementById("searchbutton").click();
     }
 });
 
 function displayResults(results) {
+    console.log("results: " + results);
+
     let resultDivs = document.getElementById("result");
 
     // remove previous results
@@ -44,10 +46,15 @@ function displayResults(results) {
         resultDivs.removeChild(resultDivs.lastChild);
     }
 
+    if (!results["response"]["docs"]) {
+        return;
+    }
+
     for (const doc of results["response"]["docs"]) {
         var resultDiv = document.createElement("div");
 
         var newDiv = document.createElement("div");
+        newDiv.className = "result-title";
         var newContent = document.createTextNode(doc["filename"]);
         newDiv.appendChild(newContent);
         resultDiv.appendChild(newDiv);

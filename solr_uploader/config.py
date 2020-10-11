@@ -5,6 +5,7 @@ import toml
 
 config = None
 
+collection = 'documents'
 
 def parse_configuration(config_path='extraction_config.toml'):
     with open(config_path, 'r') as toml_config:

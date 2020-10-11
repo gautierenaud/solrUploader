@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 import requests
@@ -12,6 +13,7 @@ def collection_exists(collection: str):
         return True
     return False
 
+
 def create_collection(collection: str):
     requests.get(f'http://localhost:8983/solr/admin/collections?&action=CREATE&name={collection}&numShards=1&wt=json')
     commit(collection)
@@ -21,7 +23,7 @@ def upload_file(collection, filename, fullpath, content):
     url = f'http://localhost:8983/solr/{collection}/update/json/docs'
     headers = {'Content-Type': 'application/json'}
     data = {
-        "id": fullpath,
+        "id": hashlib.sha512(fullpath.encode('utf-8')).hexdigest(),
         "filename": filename,
         "fullpath": fullpath,
         "text": content
@@ -37,3 +39,10 @@ def commit(collection):
 def get_collection_info(collection):
     r = requests.get(f'http://localhost:8983/solr/{collection}/query?debug=query&q=*:*&wt=json')
     return r.text
+
+
+def get_file(collection, id):
+    r = requests.get(f'http://localhost:8983/solr/{collection}/get?id={id}')
+    if r.status_code == 200:
+        return json.loads(r.text)
+    return None

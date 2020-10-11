@@ -28,7 +28,12 @@ body {
     display: flex;
 }
 
+.result-title {
+    font-weight: bold;
+}
+
 pre {
+    width: 100%;
     background: #f4f4f4;
     border: 1px solid #ddd;
     border-left: 3px solid #f36d33;
