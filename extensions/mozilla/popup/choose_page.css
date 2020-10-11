@@ -21,6 +21,7 @@ body {
     flex-grow: 1;
     margin-left: 2px;
     margin-right: 2px;
+    margin-bottom: 2px;
 }
 
 #searchzone {
@@ -28,8 +29,23 @@ body {
     display: flex;
 }
 
+.result-header {
+    display: flex;
+    text-align: center;
+}
+
 .result-title {
     font-weight: bold;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.download-button {
+    content: url(../icons/download-32.png);
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 pre {

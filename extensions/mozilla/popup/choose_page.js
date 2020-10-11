@@ -1,12 +1,6 @@
-// add onclick event listeners
-var searchButton = document.getElementById("searchbutton");
-searchButton.addEventListener("click", function(e) {
-    sendSearchRequest();
-});
-
 function sendSearchRequest() {
     let searchText = document.getElementById("searchbox").value;
-    console.log(searchText);
+    console.log("searching for : " + searchText);
 
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -23,22 +17,7 @@ function sendSearchRequest() {
     xhr.send();
 }
 
-// Get the input field
-var input = document.getElementById("searchbox");
-
-// Execute a function when the user releases a key on the keyboard
-input.addEventListener("keyup", function(event) {
-    if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("searchbutton").click();
-    }
-});
-
 function displayResults(results) {
-    console.log("results: " + results);
-
     let resultDivs = document.getElementById("result");
 
     // remove previous results
@@ -46,23 +25,36 @@ function displayResults(results) {
         resultDivs.removeChild(resultDivs.lastChild);
     }
 
-    if (!results["response"]["docs"]) {
-        return;
-    }
-
     for (const doc of results["response"]["docs"]) {
         var resultDiv = document.createElement("div");
 
-        var newDiv = document.createElement("div");
-        newDiv.className = "result-title";
-        var newContent = document.createTextNode(doc["filename"]);
-        newDiv.appendChild(newContent);
-        resultDiv.appendChild(newDiv);
+        var headerDiv = document.createElement("div");
+        headerDiv.className = "result-header";
 
-        var newHighlight = document.createElement("pre");
-        newHighlight.innerHTML = results["highlighting"][doc["id"]]["text"];
-        resultDiv.appendChild(newHighlight);
+        var filenameDiv = document.createElement("div");
+        filenameDiv.className = "result-title";
+        var filename = document.createTextNode(doc["filename"]);
+        filenameDiv.appendChild(filename);
+        headerDiv.appendChild(filenameDiv);
+
+        var downloadDiv = document.createElement("a");
+        downloadDiv.className = "download-button button";
+        downloadDiv.addEventListener("click", function() {
+            dowloadFile(doc);
+        });
+        headerDiv.appendChild(downloadDiv);
+
+        resultDiv.appendChild(headerDiv);
+
+        var previewDiv = document.createElement("pre");
+        previewDiv.innerHTML = results["highlighting"][doc["id"]]["text"];
+        resultDiv.appendChild(previewDiv);
 
         resultDivs.appendChild(resultDiv);
     }
+}
+
+function dowloadFile(doc) {
+    console.log("content script sending message:" + JSON.stringify(doc));
+    browser.runtime.sendMessage({ "download": doc });
 }

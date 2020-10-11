@@ -5,6 +5,7 @@ with open("README.md", "r") as fh:
 
 req = [
     'flask',
+    'flask-cors',
     'pypdf2',
     'requests'
 ]

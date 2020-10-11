@@ -6,6 +6,10 @@
     "icons": {
         "48": "icons/search-48.png"
     },
+    "permissions": ["notifications", "downloads"],
+    "background": {
+        "scripts": ["background-script.js"]
+    },
     "browser_action": {
         "default_icon": "icons/search-32.png",
         "default_title": "SolrSearch",
