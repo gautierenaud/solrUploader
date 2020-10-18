@@ -6,7 +6,7 @@
     "icons": {
         "48": "icons/search-48.png"
     },
-    "permissions": ["notifications", "downloads"],
+    "permissions": ["notifications", "downloads", "tabs"],
     "background": {
         "scripts": ["background-script.js"]
     },

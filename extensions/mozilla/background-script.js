@@ -13,11 +13,11 @@ function notify(message) {
 }
 
 function downloadFileBack(doc) {
-    console.log(JSON.stringify(doc));
+    console.log("[back] download file for :" + JSON.stringify(doc));
 
     var downloading = browser.downloads.download({
         url: `http://localhost:5000/file/${doc.id}`,
-        filename: doc.filename[0],
+        filename: doc.doc_name[0],
         conflictAction: 'uniquify'
     });
 }

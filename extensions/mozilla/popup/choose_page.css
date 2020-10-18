@@ -1,6 +1,6 @@
 html,
 body {
-    width: 400px;
+    width: 600px;
 }
 
 .button {
@@ -42,6 +42,22 @@ body {
 
 .download-button {
     content: url(../icons/download-32.png);
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.link-button {
+    content: url(../icons/link-32.png);
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.save-button {
+    content: url(../icons/save-32.png);
     width: 16px;
     height: 16px;
     margin-right: 5px;

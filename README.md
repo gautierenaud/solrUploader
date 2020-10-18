@@ -6,6 +6,8 @@ This repo will contain the scripts used to upload files to solr
 
 * upload from different data sources (github, drive, dropbox, save web page, ...)
 * get link / download file
+* scan pdf attachment/notes
+* Enrich website/file view (e.g. "Your notes related to SQL" on a page dealing with SQL)
 * implement API to upload to solr
 * whitelist
 * blacklist
@@ -21,3 +23,5 @@ This repo will contain the scripts used to upload files to solr
 about:config > ui.popup.disable_autohide
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#Communicating_with_background_scripts
+
+For tools downloading sites to pdf, need the right fonts on the local machine.

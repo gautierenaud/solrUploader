@@ -13,3 +13,8 @@ var searchButton = document.getElementById("searchbutton");
 searchButton.addEventListener("click", function(e) {
     sendSearchRequest();
 });
+
+var saveButton = document.getElementById("savebutton");
+saveButton.addEventListener("click", function(e) {
+    sendSavePageRequest();
+});

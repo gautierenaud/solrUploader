@@ -7,7 +7,7 @@ import PyPDF2
 import toml
 
 from solr_uploader.logger import log
-from solr_uploader.solr import upload_file
+from solr_uploader.solr import upload_localfile
 
 
 def scan_path(collection, path):
@@ -23,7 +23,10 @@ def scan_path(collection, path):
 
 def scan_file(collection, file_path):
     content = get_content(file_path)
-    upload_file(collection, os.path.basename(file_path), file_path, content)
+    if not content:
+        log.warn(f'No content for {file_path}')
+    else:
+        upload_localfile(collection, os.path.basename(file_path), file_path, content)
 
 
 def get_mime(file_path):
@@ -44,9 +47,10 @@ def get_content(file_path):
 
 
 def get_pdf_content(file_path):
+    log.debug(f'Extracting pdf content from {file_path}')
     content = ""
     with open(file_path, 'rb') as pdf:
-        reader = PyPDF2.PdfFileReader(pdf)
+        reader = PyPDF2.PdfFileReader(pdf, strict=False)
         for page in range(reader.numPages):
             current_page = reader.getPage(page)
             content += current_page.extractText()

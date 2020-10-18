@@ -33,16 +33,25 @@ function displayResults(results) {
 
         var filenameDiv = document.createElement("div");
         filenameDiv.className = "result-title";
-        var filename = document.createTextNode(doc["filename"]);
+        var filename = document.createTextNode(doc["doc_name"]);
         filenameDiv.appendChild(filename);
         headerDiv.appendChild(filenameDiv);
 
-        var downloadDiv = document.createElement("a");
-        downloadDiv.className = "download-button button";
-        downloadDiv.addEventListener("click", function() {
-            dowloadFile(doc);
-        });
-        headerDiv.appendChild(downloadDiv);
+        if (doc["local_path"]) {
+            var downloadDiv = document.createElement("a");
+            downloadDiv.className = "download-button button";
+            downloadDiv.addEventListener("click", function() {
+                dowloadFile(doc);
+            });
+            headerDiv.appendChild(downloadDiv);
+        }
+
+        if (doc["web_url"]) {
+            var linkDiv = document.createElement("a");
+            linkDiv.className = "link-button button";
+            linkDiv.href = doc["web_url"];
+            headerDiv.appendChild(linkDiv);
+        }
 
         resultDiv.appendChild(headerDiv);
 
@@ -57,4 +66,22 @@ function displayResults(results) {
 function dowloadFile(doc) {
     console.log("content script sending message:" + JSON.stringify(doc));
     browser.runtime.sendMessage({ "download": doc });
+}
+
+function sendSavePageRequest() {
+    browser.tabs.query({ currentWindow: true, active: true })
+        .then((tabs) => {
+            let url = tabs[0].url;
+            console.log("saving : " + url);
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.onerror = function() {
+                console.log(this)
+            }
+
+            xhr.open('POST', `http://localhost:5000/web`, true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify({ "url": url }));
+        })
 }
