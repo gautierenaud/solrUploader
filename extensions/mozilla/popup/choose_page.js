@@ -1,3 +1,5 @@
+var apiUrl = "http://localhost:5000";
+
 function sendSearchRequest() {
     let searchText = document.getElementById("searchbox").value;
     console.log("searching for : " + searchText);
@@ -13,7 +15,7 @@ function sendSearchRequest() {
         console.log(this)
     }
 
-    xhr.open('GET', `http://localhost:8899/solr/documents/query?debug=query&q=text:"${searchText}"~2&hl.fl=text&hl=on&usePhraseHighLighter=true&wt=json`, true);
+    xhr.open('GET', apiUrl + `/search/${searchText}`, true);
     xhr.send();
 }
 
@@ -25,8 +27,21 @@ function displayResults(results) {
         resultDivs.removeChild(resultDivs.lastChild);
     }
 
+    var resultCountDiv = document.createElement("div");
+    resultCountDiv.className = "result-count";
+    var count = results["response"]["docs"].length;
+    console.log("Length: " + count);
+    var countTxt = count == 0 ? "No" : count.toString();
+    countTxt += " Result";
+    if (count > 1) {
+        countTxt += "s"
+    }
+    resultCountDiv.textContent = countTxt;
+    resultDivs.appendChild(resultCountDiv);
+
     for (const doc of results["response"]["docs"]) {
         var resultDiv = document.createElement("div");
+        resultDiv.className = "result-item";
 
         var headerDiv = document.createElement("div");
         headerDiv.className = "result-header";
@@ -80,7 +95,7 @@ function sendSavePageRequest() {
                 console.log(this)
             }
 
-            xhr.open('POST', `http://localhost:5000/web`, true);
+            xhr.open('POST', apiUrl + `/web`, true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.send(JSON.stringify({ "url": url }));
         })

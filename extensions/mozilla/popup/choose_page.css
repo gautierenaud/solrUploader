@@ -1,6 +1,5 @@
-html,
 body {
-    width: 600px;
+    width: 500px;
 }
 
 .button {
@@ -27,6 +26,19 @@ body {
 #searchzone {
     width: 100%;
     display: flex;
+    margin: auto;
+    text-align: center;
+}
+
+.result-count {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #808080;
+    opacity: 0.7;
+}
+
+.result-item {
+    margin-top: 5px;
 }
 
 .result-header {
@@ -38,6 +50,9 @@ body {
     font-weight: bold;
     margin-top: auto;
     margin-bottom: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .download-button {
@@ -60,12 +75,11 @@ body {
     content: url(../icons/save-32.png);
     width: 16px;
     height: 16px;
-    margin-right: 5px;
+    margin: auto;
     margin-left: 5px;
 }
 
 pre {
-    width: 100%;
     background: #f4f4f4;
     border: 1px solid #ddd;
     border-left: 3px solid #f36d33;
@@ -75,9 +89,10 @@ pre {
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 1.6em;
-    max-width: 100%;
-    overflow: auto;
     padding: 1em 1.5em;
     display: block;
     word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

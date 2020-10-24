@@ -91,3 +91,9 @@ def remove_file(collection, id):
 def remove_collection(collection):
     r = requests.post(f'http://localhost:8983/solr/admin/collections?action=DELETE&name={collection}')
     return r.status_code == 200
+
+def search(collection, search_content):
+    r = requests.get(f'http://localhost:8899/solr/{collection}/query?debug=query&q=text:"{search_content}"~2&hl.fl=text&hl=on&usePhraseHighLighter=true&wt=json')
+    if r.status_code == 200:
+        return json.loads(r.text)
+    return None
