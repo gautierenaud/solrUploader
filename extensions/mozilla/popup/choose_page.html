@@ -8,14 +8,26 @@
 </head>
 
 <body>
-    <div id="searchzone">
-        <input id="searchbox" type="text" autofocus>
-        <div id="searchbutton" class="button">Search</div>
-        <div id="savebutton" class="save-button button"></div>
+    <div class="tab">
+        <div class="tablinks searchtab" value="searchtab">London</div>
+        <div class="tablinks savetab" value="savefile">Paris</div>
     </div>
-    <div id="result"></div>
+
+    <div id="searchtab" class="tabcontent">
+        <div id="searchzone">
+            <input id="searchbox" type="text" autofocus>
+            <div id="searchbutton" class="button">Search</div>
+            <!-- <div id="savebutton" class="save-button button"></div> -->
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <div id="savefile" class="tabcontent">
+        <div id="result">TBD</div>
+    </div>
 
     <script src="choose_page.js"></script>
+    <script src="tab.js"></script>
     <script src="listeners.js"></script>
 </body>
 

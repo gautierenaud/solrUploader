@@ -71,7 +71,7 @@ function displayResults(results) {
         resultDiv.appendChild(headerDiv);
 
         var previewDiv = document.createElement("pre");
-        previewDiv.innerHTML = results["highlighting"][doc["id"]]["text"];
+        previewDiv.innerHTML = results["highlighting"][doc["id"]]["content"];
         resultDiv.appendChild(previewDiv);
 
         resultDivs.appendChild(resultDiv);

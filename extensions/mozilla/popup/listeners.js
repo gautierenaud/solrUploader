@@ -14,7 +14,14 @@ searchButton.addEventListener("click", function(e) {
     sendSearchRequest();
 });
 
-var saveButton = document.getElementById("savebutton");
-saveButton.addEventListener("click", function(e) {
-    sendSavePageRequest();
-});
+// var saveButton = document.getElementById("savebutton");
+// saveButton.addEventListener("click", function(e) {
+//     sendSavePageRequest();
+// });
+
+var tablinks = document.getElementsByClassName("tablinks");
+for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].addEventListener("click", function(e) {
+        updateTabs(e);
+    });
+}

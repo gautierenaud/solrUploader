@@ -71,12 +71,18 @@ body {
     margin-left: 5px;
 }
 
-.save-button {
+.savetab {
     content: url(../icons/save-32.png);
-    width: 16px;
-    height: 16px;
-    margin: auto;
-    margin-left: 5px;
+    width: 32px;
+    height: 32px;
+    margin: 5px;
+}
+
+.searchtab {
+    content: url(../icons/magnifying_glass-32.png);
+    width: 32px;
+    height: 32px;
+    margin: 5px;
 }
 
 pre {
@@ -95,4 +101,24 @@ pre {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.tab {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab div:hover {
+    background-color: #ddd;
+}
+
+
+/* Style the tab content */
+
+.tabcontent {
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none;
 }
