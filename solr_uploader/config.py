@@ -5,14 +5,27 @@ import toml
 
 config = None
 
-collection = 'documents'
 
-def parse_configuration(config_path='extraction_config.toml'):
+class Config():
+    def __init__(self, config_path=''):
+        parsed_config = parse_configuration(config_path)
+
+        self.collection = configTernary(parsed_config, 'collection', 'documents')
+        self.solr_url = configTernary(parsed_config, 'solr_urn', 'http://localhost:8983/solr')
+
+
+def parse_configuration(config_path):
+    if not config_path:
+        return {}
+
     with open(config_path, 'r') as toml_config:
         global config
         config = toml.loads(toml_config.read())
+    return config
 
-        # TODO: check the config contains everything necessary/default values (initialize class from dict ?)
+
+def configTernary(config, field, default_value):
+    return config[field] if field in config else default_value
 
 
 def is_ignored(file_path):
@@ -21,3 +34,7 @@ def is_ignored(file_path):
         if fnmatch.fnmatch(file_name, ignored_file):
             return True
     return False
+
+
+if not config:
+    config = Config()

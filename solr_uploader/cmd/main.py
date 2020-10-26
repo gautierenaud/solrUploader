@@ -3,7 +3,7 @@ import sys
 
 import solr_uploader.config as config
 import solr_uploader.service.endpoint as serve
-import solr_uploader.solr as solr
+from solr_uploader.solr import solr
 import solr_uploader.uploader as uploader
 from solr_uploader.logger import log
 
@@ -40,11 +40,11 @@ def main():
         serve.start_endpoint()
     elif args.command == 'solr':
         if args.solr_command == 'rm':
-            sys.exit(not solr.remove_file(config.collection, args.solr_doc_id))
+            sys.exit(not solr.remove_file(args.solr_doc_id))
         if args.solr_command == 'rmcol':
-            sys.exit(not solr.remove_collection(config.collection))
+            sys.exit(not solr.remove_collection())
         elif args.solr_command == 'info':
-            print(solr.get_collection_info(config.collection))
+            print(solr.get_collection_info())
 
 
 if __name__ == "__main__":

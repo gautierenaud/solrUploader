@@ -7,26 +7,26 @@ import PyPDF2
 import toml
 
 from solr_uploader.logger import log
-from solr_uploader.solr import upload_localfile
+from solr_uploader.solr import solr
 
 
-def scan_path(collection, path):
+def scan_path(path):
     for child_item in os.listdir(path):
         full_path = os.path.join(path, child_item)
         if os.path.isfile(full_path):
-            scan_file(collection, full_path)
+            scan_file(full_path)
         elif os.path.isdir(full_path):
-            scan_path(collection, full_path)
+            scan_path(full_path)
         else:
             log.warn(f'Unknown file type at: {full_path}')
 
 
-def scan_file(collection, file_path):
+def scan_file(file_path):
     content = get_content(file_path)
     if not content:
         log.warn(f'No content for {file_path}')
     else:
-        upload_localfile(collection, os.path.basename(file_path), file_path, content)
+        solr.upload_localfile(os.path.basename(file_path), file_path, content)
 
 
 def get_mime(file_path):
