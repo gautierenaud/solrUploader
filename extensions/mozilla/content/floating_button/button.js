@@ -2,6 +2,8 @@
  * Drag the button around
  */
 
+let movable = true;
+
 function dragElement(elmnt) {
     var pos1 = 0,
         pos2 = 0,
@@ -16,6 +18,8 @@ function dragElement(elmnt) {
     }
 
     function dragMouseDown(e) {
+        if (!movable) { return; }
+
         e = e || window.event;
         e.preventDefault();
         // get the mouse cursor position at startup:
@@ -27,6 +31,8 @@ function dragElement(elmnt) {
     }
 
     function elementDrag(e) {
+        if (!movable) { return; }
+
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
@@ -40,37 +46,56 @@ function dragElement(elmnt) {
     }
 
     function closeDragElement() {
+        if (!movable) { return; }
+
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
     }
 }
 
-var elem = document.createElement('div');
-elem.classList.add("actionbutton");
-elem.innerHTML =
-    '<div class="actionbuttonheader">\
-        <label id="test" for="test">click me</label>\
-    </div>';
+var actionButton = document.createElement("div");
+actionButton.classList.add("actionbutton");
 
-elem.style.top = "5%";
-elem.style.left = "5%";
-document.body.prepend(elem);
+var actionButtonHeader = document.createElement("div");
+actionButtonHeader.classList.add("actionbuttonheader");
+actionButtonHeader.id = "test";
+actionButton.appendChild(actionButtonHeader);
 
-dragElement(elem);
+var saveActionIcon = document.createElement("img");
+saveActionIcon.src = browser.runtime.getURL("icons/save-32.png")
+actionButtonHeader.appendChild(saveActionIcon);
+
+var editSection = document.createElement("div");
+editSection.classList.add("editSection");
+editSection.id = "editsection";
+editSection.style.display = "none";
+
+var editSectionInputText = document.createElement("div");
+editSectionInputText.contentEditable = "true";
+editSectionInputText.textContent = "editme";
+editSection.appendChild(editSectionInputText);
+
+var saveButton = document.createElement("button");
+saveButton.textContent = "Save";
+editSection.appendChild(saveButton);
+
+var cancelButton = document.createElement("button");
+cancelButton.textContent = "Cancel";
+cancelButton.onclick = hideActionPane;
+editSection.appendChild(cancelButton);
+
+actionButtonHeader.appendChild(editSection);
+
+actionButton.style.top = "5%";
+actionButton.style.left = "5%";
+document.body.prepend(actionButton);
+
+dragElement(actionButton);
 
 /**
  * don't resize the button when dragging
  */
-
-function toggleButton() {
-    var testElem = document.getElementById("test");
-    if (testElem.hasAttribute("status")) {
-        testElem.removeAttribute("status");
-    } else {
-        testElem.setAttribute("status", "checked");
-    }
-}
 
 let isSwiping = false;
 
@@ -84,8 +109,34 @@ document.getElementById('test').addEventListener('mousemove', () => {
 
 document.getElementById('test').addEventListener('mouseup', e => {
     if (!this.isSwiping && e.button === 0) {
-        toggleButton();
+        showActionPane();
     }
 
     this.isSwiping = false;
 });
+
+/**
+ * Hide/Show action pane
+ */
+
+function showActionPane() {
+    var testElem = document.getElementById("test");
+    testElem.setAttribute("status", "checked");
+
+    document.getElementById("editsection").style.display = "block";
+
+    movable = false;
+}
+
+function hideActionPane() {
+    var testElem = document.getElementById("test");
+    testElem.removeAttribute("status");
+
+    document.getElementById("editsection").style.display = "none";
+
+    movable = true;
+
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+}

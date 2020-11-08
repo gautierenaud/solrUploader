@@ -19,5 +19,6 @@
         "default_icon": "icons/search-32.png",
         "default_title": "SolrSearch",
         "default_popup": "popup/choose_page.html"
-    }
+    },
+    "web_accessible_resources": ["icons/save-32.png"]
 }

@@ -1,10 +1,10 @@
-label {
+.actionbuttonheader {
     display: block;
     height: 5rem;
     width: 5rem;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background: #5D2E8C;
+    background: #48ff00b2;
     color: #FFFFFF;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -14,7 +14,7 @@ label {
     transition: all 500ms cubic-bezier(0.93, 0.1, 0.42, 0.91);
 }
 
-label:hover {
+.actionbuttonheader:hover:not([status="checked"]) {
     cursor: pointer;
 }
 
