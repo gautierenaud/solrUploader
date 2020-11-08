@@ -12,11 +12,16 @@ input.addEventListener("keyup", function(event) {
 var searchButton = document.getElementById("searchbutton");
 searchButton.addEventListener("click", function(e) {
     sendSearchRequest();
+    // var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+    // gettingActiveTab.then((tabs) => {
+    //     browser.tabs.sendMessage(tabs[0].id, { beastURL: "lala" });
+    // });
 });
 
 // var saveButton = document.getElementById("savebutton");
 // saveButton.addEventListener("click", function(e) {
-//     sendSavePageRequest();
+//     // sendSavePageRequest();
+//     insertButton();
 // });
 
 var tablinks = document.getElementsByClassName("tablinks");

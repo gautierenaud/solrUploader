@@ -1,0 +1,36 @@
+label {
+    display: block;
+    height: 5rem;
+    width: 5rem;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: #5D2E8C;
+    color: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    line-height: 5rem;
+    -webkit-transition: all 500ms cubic-bezier(0.93, 0.1, 0.42, 0.91);
+    transition: all 500ms cubic-bezier(0.93, 0.1, 0.42, 0.91);
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+#test[status="checked"] {
+    height: 90vh;
+    width: 90vw;
+    top: 50%;
+    left: 50%;
+    border-radius: 5px;
+    background: #2EC4B6;
+    position: fixed;
+}
+
+.actionbutton {
+    position: fixed;
+    z-index: 9999;
+    width: 0px;
+    height: 0px;
+}

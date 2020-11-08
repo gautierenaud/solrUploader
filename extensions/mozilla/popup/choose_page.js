@@ -100,3 +100,7 @@ function sendSavePageRequest() {
             xhr.send(JSON.stringify({ "url": url }));
         })
 }
+
+if (browser.tabs.executeScript(null, { file: "/content_scripts/content.js" })) {
+    console.log("script executed");
+}
