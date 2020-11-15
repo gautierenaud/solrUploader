@@ -68,8 +68,8 @@ class Solr():
     def upload_localfile(self, filename, fullpath, content):
         self.upload_document(filename, content, local_path=fullpath)
 
-    def upload_pdf(self, filename, pdf: PyPDF2.PdfFileReader, fullpath=None, url=None):
-        if not pdf.getDocumentInfo().title:
+    def upload_pdf(self, filename, pdf: PyPDF2.PdfFileReader, fullpath=None, url=None, title=None, attachments=None):
+        if not title and not pdf.getDocumentInfo().title:
             log.error('Could not get document name')
             return
 
@@ -78,7 +78,7 @@ class Solr():
             current_page = pdf.getPage(page)
             content += current_page.extractText()
 
-        self.upload_document(pdf.getDocumentInfo().title, content, local_path=fullpath, web_url=url)
+        self.upload_document(pdf.getDocumentInfo().title if not title else title, content, local_path=fullpath, web_url=url, attachments=attachments)
 
     def commit(self):
         log.info(f'Commit to collection "{self._config.collection}"')

@@ -38,6 +38,8 @@ def retrieve(id_hash):
 def save_website():
     json_data = request.get_json(silent=False)
 
+    log.debug(f'Received {json_data}')
+
     if not json_data or not json_data['url']:
         return 'Missing url', 400
 
@@ -47,8 +49,14 @@ def save_website():
     site_pdf = site.write_pdf()
     with io.BytesIO(site_pdf) as f:
         pdf = PyPDF2.PdfFileReader(f)
-        solr.upload_pdf(pdf.getDocumentInfo().title, pdf, url=url)
-    return "Ok"
+
+        title = json_data['title'] if 'title' in json_data else pdf.getDocumentInfo().title
+        attachments = json_data['attachments'] if 'attachments' in json_data else None
+
+        log.debug(f'attachments: {attachments}')
+
+        solr.upload_pdf(filename=pdf.getDocumentInfo().title, pdf=pdf, url=url, title=title, attachments=attachments)
+    return "Ok", 200
 
 @app.route('/search/<search_content>', methods=['GET'])
 @cross_origin(origin='*', headers=['Content-Type', 'Authorization'])

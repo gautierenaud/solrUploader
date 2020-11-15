@@ -15,6 +15,8 @@ This repo will contain the scripts used to upload files to solr
 * make the upload //
 * detect language of uploaded files (https://lucene.apache.org/solr/guide/8_6/detecting-languages-during-indexing.html)
 * Upload multiple json (https://lucene.apache.org/solr/guide/6_6/uploading-data-with-index-handlers.html)
+* crawl documents in links (maybe with some depth limit, probably 1).
+* TODO items. e.g. go on an interesting site, mark it for later (with an alarm ? regroup multiple TODOs in category ?)
 
 # Debug extension
 

@@ -6,19 +6,31 @@
     "icons": {
         "48": "icons/search-48.png"
     },
-    "permissions": ["notifications", "downloads", "tabs", "activeTab"],
+
+    "permissions": ["http://*/*", "https://*/*", "notifications", "downloads", "tabs", "activeTab"],
+
     "background": {
         "scripts": ["background-script.js"]
     },
+
     "content_scripts": [{
-        "css": ["content/floating_button/button.css"],
-        "js": ["content/floating_button/button.js"],
+        "css": [
+            "external_dependencies/easymde.min.css",
+            "content/floating_button/button.css"
+        ],
+        "js": [
+            "external_dependencies/easymde.min.js",
+            "content/floating_button/some_file.js",
+            "content/floating_button/save_button.js"
+        ],
         "matches": ["<all_urls>"]
     }],
+
     "browser_action": {
         "default_icon": "icons/search-32.png",
         "default_title": "SolrSearch",
         "default_popup": "popup/choose_page.html"
     },
+
     "web_accessible_resources": ["icons/save-32.png"]
 }
