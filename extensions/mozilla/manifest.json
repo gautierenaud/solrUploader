@@ -16,6 +16,7 @@
     "content_scripts": [{
         "css": [
             "external_dependencies/easymde.min.css",
+            "external_dependencies/solarized_light.min.css",
             "content/floating_button/button.css"
         ],
         "js": [

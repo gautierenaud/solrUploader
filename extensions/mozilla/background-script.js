@@ -43,6 +43,10 @@ function savePage(page) {
         console.log(this);
     }
 
+    xhr.onload = function(e) {
+        console.log(xhr.response);
+    }
+
     xhr.open('POST', `${apiUrl}/web`, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(payload));

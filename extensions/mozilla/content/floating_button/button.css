@@ -8,13 +8,12 @@
 }
 
 .kbbutton {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 5rem;
     width: 5rem;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background: #48ff00b2;
-    color: #FFFFFF;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -28,7 +27,6 @@
     top: 50%;
     left: 50%;
     border-radius: 5px;
-    background: #2EC4B6;
     position: fixed;
 }
 
@@ -41,4 +39,5 @@
     display: none;
     text-align: justify;
     padding: 20px;
+    flex-grow: 1;
 }

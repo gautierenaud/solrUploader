@@ -1,3 +1,8 @@
+function saveAction() {
+    sendSavePageRequest();
+    shrinkButtons();
+}
+
 function sendSavePageRequest() {
     var saveMessage = {
         "save": {
@@ -32,7 +37,7 @@ noteEditor.id = "kbsavenote";
 content.appendChild(noteEditor);
 
 var saveButton = document.createElement("button");
-saveButton.onclick = sendSavePageRequest;
+saveButton.onclick = saveAction;
 saveButton.textContent = "Save";
 content.appendChild(saveButton);
 

@@ -8,6 +8,7 @@ function addDraggableMorphingButton(iconHtml, contentDOM) {
     // create the containg element
     var button = document.createElement("div");
     button.classList.add("kbbutton");
+    button.classList.add("sbluebg");
 
     // append the buttonContent
     var buttonContentHolder = document.createElement("div");
@@ -19,6 +20,7 @@ function addDraggableMorphingButton(iconHtml, contentDOM) {
     var morphedContentHolder = document.createElement("div");
     morphedContentHolder.appendChild(contentDOM);
     morphedContentHolder.classList.add("kbbuttoncontent");
+    morphedContentHolder.classList.add("base3bg");
     button.appendChild(morphedContentHolder);
 
     // make it draggable
