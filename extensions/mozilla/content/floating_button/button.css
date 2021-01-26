@@ -16,9 +16,10 @@
     transform: translateX(-50%) translateY(-50%);
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
     -webkit-transition: all 500ms cubic-bezier(0.93, 0.1, 0.42, 0.91);
     transition: all 500ms cubic-bezier(0.93, 0.1, 0.42, 0.91);
+    text-align: center;
+    font-family: times, Times New Roman, times-roman, georgia, serif;
 }
 
 .kbbutton[status="checked"] {
@@ -40,4 +41,22 @@
     text-align: justify;
     padding: 20px;
     flex-grow: 1;
+}
+
+.kbbuttonlabel {
+    font-size: 1em;
+}
+
+.kbonelineinput {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 1.2em;
+    text-decoration: underline dotted;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.kbeditorholder {
+    color: black !important;
 }

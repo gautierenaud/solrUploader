@@ -17,6 +17,7 @@ This repo will contain the scripts used to upload files to solr
 * Upload multiple json (https://lucene.apache.org/solr/guide/6_6/uploading-data-with-index-handlers.html)
 * crawl documents in links (maybe with some depth limit, probably 1).
 * TODO items. e.g. go on an interesting site, mark it for later (with an alarm ? regroup multiple TODOs in category ?)
+* check [trafilatura](https://github.com/adbar/trafilatura) to extract main content from web page (+ screenshot for png ?)
 
 # Debug extension
 
